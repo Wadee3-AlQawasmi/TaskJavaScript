@@ -156,6 +156,9 @@ margin-right: 10px;
        .Unread{
         background-color: #eee;
        }
+       .test{
+           background-color: none;
+       }
 
        input[type=text]{
         width: 80%;

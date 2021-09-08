@@ -3,11 +3,226 @@
     <head>
         <link href="style.css" rel="stylesheet" type="text/css"/>
 
+        <script type="text/javascript">
+
+        function Inbox(){
+
+            document.getElementById("Inbox").style.display="block";
+            document.getElementById("SendEmail").style.display="none";
+            document.getElementById("SentMail").style.display="none";
+            
+            var Inbox =document.getElementById("InboxMenu")
+                Inbox.className="menueItem active"
+                var Sent=document.getElementById("SentMenu")
+                Sent.className="menueItem"
+            }          
+
+        function Compose(){
+            
+            document.getElementById("Inbox").style.display="none";
+            document.getElementById("SendEmail").style.display="block";
+            document.getElementById("SentMail").style.display="none";
+
+            var Sent =document.getElementById("SentMenu")
+                Sent.className="menueItem"
+                var Inbox=document.getElementById("InboxMenu")
+                Inbox.className="menueItem"
+        }
+        
+        function SentMail(){
+            document.getElementById("Inbox").style.display="none";
+            document.getElementById("SendEmail").style.display="none";
+            document.getElementById("SentMail").style.display="block";
+            
+            var Sent =document.getElementById("SentMenu")
+                Sent.className="menueItem active"
+                var Inbox=document.getElementById("InboxMenu")
+                Inbox.className="menueItem"
+        }
+
+        function DisplayIcons(icon)
+        {
+            var x=icon.getElementsByClassName("emailAction")
+            x[0].style.display="block"
+        }
+
+        function HideIcons(icon)
+        {
+            var x=icon.getElementsByClassName("emailAction")
+            x[0].style.display="none"
+        }
 
 
+        function SelectAll(CheckBox){
+
+            var Div= document.getElementById("Inbox")
+            var tab= Div.getElementsByTagName("table")[0]
+            var x= tab.getElementsByTagName("input")
+
+            if(CheckBox.checked==true)
+            {
+                for(i=0;i<x.length;i++)
+                {
+                    x[i].checked=true
+                }
+
+            }   
+            else
+            {
+                for(i=0;i<x.length;i++)
+                {
+                    x[i].checked=false
+                } 
+            }
+        }
+
+        function DeleteAllInbox() {
+
+            var Div= document.getElementById("Inbox")
+            var tab= Div.getElementsByTagName("table")[0]
+            var x= tab.getElementsByTagName("input")
+            
+            for(i=0;i<x.length;i++)
+            {
+                if(x[i].checked==true)
+                {
+                    x[i].parentNode.parentNode.remove(i);
+                    i--;
+                }
+            }
+        }
+
+        function ChangeToUnRead(UnRead){
+            
+            var x= UnRead.parentNode.parentNode.parentNode
+            x.classList.add("Unread")
+        }
+        
+        function ReadAll(){
+
+            var Div= document.getElementById("Inbox")
+            var tab= Div.getElementsByTagName("table")[0]
+            var x= tab.getElementsByTagName("input")
+            
+            for(i=0;i<x.length;i++)
+            {
+                if(x[i].checked==true)
+                {
+                    var y=x[i].parentNode.parentNode
+                    y.classList.remove("Unread")
+                    x[i].checked=false
+                }
+            }
+        }
+
+        function ChangeToRead(change){
+            
+            var Row = change.parentNode
+            Row.classList.remove("Unread")
+        }
+
+
+        function DeleteRow(OneRow){
+            var table = OneRow.parentNode.parentNode.parentNode.parentNode
+            var Row = OneRow.parentNode.parentNode.parentNode
+            table.removeChild(Row)
+        }
+        
+        function BtnSend(){
+           
+          var To= document.getElementById("txtTo").value
+          var Sub= document.getElementById("txtSubject").value
+          var txt= document.getElementById("txtBody").value
+
+          var tab= document.getElementById("tblSent")
+          var tr1= document.createElement("tr")
+          tab.appendChild(tr1)
+          
+          var chk = document.createElement("input")
+          chk.setAttribute("type","checkbox")
+          var td0=document.createElement("td")
+          td0.appendChild(chk)
+
+          var td1= document.createElement("td")
+          var td1_value= document.createTextNode(To)
+          td1.appendChild(td1_value)
+
+          var td2= document.createElement("td")
+          var td2_value= document.createTextNode(Sub)
+          td2.appendChild(td2_value)
+          
+          var date=new Date()
+          var x= date.toDateString()
+          var td3=document.createElement("td")
+          var DateString=document.createTextNode(x)
+          td3.appendChild(DateString)
+
+
+          tr1.appendChild(td0)
+          tr1.appendChild(td1)
+          tr1.appendChild(td2)
+          tr1.appendChild(td3)
+
+          document.getElementById("txtTo").value=""
+          document.getElementById("txtSubject").value=""
+          document.getElementById("txtBody").value=""
+        }
+
+        function BtnCancel(){
+
+            document.getElementById("Inbox").style.display="block";
+            document.getElementById("SendEmail").style.display="none";
+            document.getElementById("SentMail").style.display="none";
+            
+            var Inbox =document.getElementById("InboxMenu")
+                Inbox.className="menueItem active"
+                var Sent=document.getElementById("SentMenu")
+                Sent.className="menueItem"
+        }
+
+        function SelectAllS(CheckBox){
+
+            var Div= document.getElementById("SentMail")
+            var tab= Div.getElementsByTagName("table")[0]
+            var x= tab.getElementsByTagName("input")
+
+            if(CheckBox.checked==true)
+            {
+                for(i=0;i<x.length;i++)
+                {
+                    x[i].checked=true
+                }
+
+            }   
+            else
+            {
+                for(i=0;i<x.length;i++)
+                {
+                    x[i].checked=false
+                } 
+            }
+        }
+        
+        function DeleteAllSent() {
+
+            var Div= document.getElementById("SentMail")
+            var tab= Div.getElementsByTagName("table")[0]
+            var x= tab.getElementsByTagName("input")
+
+            for(i=0;i<x.length;i++)
+            {
+                if(x[i].checked==true)
+                {
+                    x[i].parentNode.parentNode.remove(i);
+                    i--;
+                }
+            }
+}
+
+        </script>
     </head>
     <body>
-        <div class="ContainerBox">
+        <div class="ContainerrBox">
         <div class="menuBox">
             <div class="HeaderLeftSide">
                 <div class="HeaderimgBox">
@@ -20,16 +235,16 @@
                 </div>
 
             </div>
-            <div class="ComposeBox">
+            <div class="ComposeBox" onclick="Compose()">
                 <button class="btn ComposeButton">compose</button>
             </div>
             <div class="MenuItemBox">
-                <div class="menueItem active" id="InboxMenu">
+                <div class="menueItem active" id="InboxMenu" onclick="Inbox()">
                 <span>
                     Inbox
                 </span>
             </div>
-            <div class="menueItem" id="SentMenu">
+            <div class="menueItem" id="SentMenu" onclick="SentMail(this)" >
                 <span>  
                     Sent Mail
                 </span>
@@ -37,18 +252,18 @@
             </div>
         </div>
         <div class="ContentBox">
-            <div class="HeaderRightSide">
+            <div class="HeaderRightSide" >
                 <h3>Inbox</h3>
             </div>
             <div id="Inbox" class="Container">
             <div class="ActionContainer">
-                <div class="ActionsBox">
-                    <input type="checkbox" />All
+                <div class="ActionsBox" >
+                    <input type="checkbox" onclick="SelectAll(this)" />All
                 </div>
-                <div class="ActionsBox">
+                <div class="ActionsBox" onclick="DeleteAllInbox()">
                     <img src="delete.png" class="ActionIcons" />
                 </div>
-                <div class="ActionsBox">
+                <div class="ActionsBox" onclick="ReadAll()">
                     <img src="mark_read.png" class="ActionIcons" />
                 </div>
             </div>
@@ -59,17 +274,17 @@
                     <colgroup style="width: 10%;"/>
                     <colgroup style="width: 30%;"/>
                     <colgroup style="width: 20%;"/>
-                    <tr class="Unread">
+                    <tr class="Unread" onclick="RemoveClass(this)" onmouseover="DisplayIcons(this)" onmouseout="HideIcons(this)">
                         <td>
                             <input type="checkbox"/>
                         </td>
-                        <td >
+                        <td onclick="ChangeToRead(this)" >
                             JKribo@gmail.com
                         </td>
                         <td>
                             <div class="emailAction" style="display: none;">
-                            <img src="delete.png" class="ActionIcons"  />
-                            <img src="mark_unread.png" class="ActionIcons"  />
+                            <img src="delete.png" class="ActionIcons" onclick="DeleteRow(this)" />
+                            <img src="mark_unread.png" class="ActionIcons" onclick="ChangeToUnRead(this)" />
                         </div>
                         </td>
                         <td>
@@ -80,17 +295,17 @@
                         </td>
 
                     </tr>
-                    <tr class="Unread" >
+                    <tr class="Unread" onclick="RemoveClass(this)" onmouseover="DisplayIcons(this)" onmouseout="HideIcons(this)">
                         <td>
                             <input type="checkbox"/>
                         </td>
-                        <td >
+                        <td onclick="ChangeToRead(this)">
                             JKribo@gmail.com
                         </td>
                         <td>
                             <div class="emailAction" style="display: none;">
-                            <img src="delete.png" class="ActionIcons"  />
-                            <img src="mark_unread.png" class="ActionIcons"  />
+                            <img src="delete.png" class="ActionIcons" onclick="DeleteRow(this)"/>
+                            <img src="mark_unread.png" class="ActionIcons" onclick="ChangeToUnRead(this)" />
                         </div>
                         </td>
                         <td>
@@ -119,19 +334,19 @@
             </div>
             <div class="actionBar">
                 <div class="SaveChangesBox">
-                    <button class="btn ButtonSubmit" >Send</button>
+                    <button class="btn ButtonSubmit" onclick="BtnSend()">Send</button>
                 </div>
                 <div class="CancelBox">
-                    <button class="btn btn-default"  >Cancel</button>
+                    <button class="btn btn-default" onclick="BtnCancel()"  >Cancel</button>
                 </div>
             </div>
         </div>
-        <div id="SentMail" class="Container" style="display: none;">
+        <div id="SentMail" class="Container" style="display: none;"  >
             <div class="ActionContainer">
                 <div class="ActionsBox">
-                    <input type="checkbox"  />All
+                    <input type="checkbox" onclick="SelectAllS(this)"/>All
                 </div>
-                <div class="ActionsBox">
+                <div class="ActionsBox" onclick="DeleteAllSent()">
                     <img src="delete.png" class="ActionIcons" />
                 </div>
             </div>
